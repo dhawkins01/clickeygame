@@ -3,7 +3,7 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./friends.json";
-import Score from "./components/Score";
+
 
 
 class App extends Component {
@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <Wrapper>
         <Title>Clicky Game!</Title>
-        <Score />
+        
         
         <br />
         {this.state.friends.map(friend => (
