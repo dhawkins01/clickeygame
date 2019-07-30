@@ -3,11 +3,17 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./friends.json";
+import Score from "./components/Score";
+
 
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    friends
+    friends,
+    currentScore: 0,
+    highScore: 0,
+    message: "",
+    clicked: [],
   };
 
   removeFriend = id => {
@@ -22,6 +28,9 @@ class App extends Component {
     return (
       <Wrapper>
         <Title>Clicky Game!</Title>
+        <Score />
+        
+        <br />
         {this.state.friends.map(friend => (
           <FriendCard
             removeFriend={this.removeFriend}
