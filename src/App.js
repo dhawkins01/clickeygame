@@ -31,6 +31,38 @@ class App extends Component {
     this.setState({ friends });
   };
 
+  handleClick = id => {
+    if (this.state.clicked.indexOf(id) === -1) {
+      this.handleIncrement();
+      this.setState({ clicked: this.state.clicked.concat(id) });
+    } else {
+      this.handleReset();
+    }
+  };
+
+  handleIncrement = () => {
+    const newScore = this.state.currentScore + 1;
+    this.setState({
+      currentScore: newScore,
+      message: "Cool. CoolCoolCool. You guessed right!"
+    });
+    if (newScore >= this.state.highScore) {
+      this.setState({ highScore: newScore });
+    }
+    this.handleShuffle();
+  };
+
+  handleReset = () => {
+    this.setState({
+      currentScore: 0,
+      highScore: this.state.highScore,
+      message: "Brittastrophe! That's not right!",
+      clicked: []
+    });
+    this.handleShuffle();
+  };
+
+
   handleShuffle = () => {
     let shuffledFriends = shuffleFriends(friends);
     this.setState({ friends: shuffledFriends });
@@ -40,19 +72,25 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Clicky Game!</Title>
-        
-        
+        <Title
+          title="Marvel Memory Game"
+          score={this.state.currentScore}
+          highScore={this.state.highScore}
+          message={this.state.message}
+        />
+
+
         <br />
         {this.state.friends.map(friend => (
           <FriendCard
+
+            key={friend.id}
+            handleClick={this.handleClick}
+            handleIncrement={this.handleIncrement}
+            handleReset={this.handleReset}
             handleShuffle={this.handleShuffle}
             id={friend.id}
-            key={friend.id}
-            name={friend.name}
             image={friend.image}
-            occupation={friend.occupation}
-            location={friend.location}
           />
         ))}
       </Wrapper>
