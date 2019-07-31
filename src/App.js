@@ -44,7 +44,7 @@ class App extends Component {
     const newScore = this.state.currentScore + 1;
     this.setState({
       currentScore: newScore,
-      message: "Cool. CoolCoolCool. You guessed right!"
+      message: "Correct!"
     });
     if (newScore >= this.state.highScore) {
       this.setState({ highScore: newScore });
@@ -56,7 +56,7 @@ class App extends Component {
     this.setState({
       currentScore: 0,
       highScore: this.state.highScore,
-      message: "Brittastrophe! That's not right!",
+      message: "Wrong! Click an image to play again",
       clicked: []
     });
     this.handleShuffle();
